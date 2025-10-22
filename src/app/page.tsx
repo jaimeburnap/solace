@@ -29,14 +29,17 @@ export default function Home() {
     setSearchTerm(value);
 
     console.log("filtering advocates...");
+    const searchLower = value.toLowerCase();
+    const searchNumber = Number(value);
+
     const filteredAdvocates = advocates.filter((advocate) => {
       return (
-        advocate.firstName.includes(value) ||
-        advocate.lastName.includes(value) ||
-        advocate.city.includes(value) ||
-        advocate.degree.includes(value) ||
-        advocate.specialties.some((s) => s.includes(value)) ||
-        advocate.yearsOfExperience >= Number(value)
+        advocate.firstName.toLowerCase().includes(searchLower) ||
+        advocate.lastName.toLowerCase().includes(searchLower) ||
+        advocate.city.toLowerCase().includes(searchLower) ||
+        advocate.degree.toLowerCase().includes(searchLower) ||
+        advocate.specialties.some((s) => s.toLowerCase().includes(searchLower)) ||
+        (!isNaN(searchNumber) && advocate.yearsOfExperience >= searchNumber)
       );
     });
 
