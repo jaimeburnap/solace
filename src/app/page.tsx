@@ -52,58 +52,93 @@ export default function Home() {
     setFilteredAdvocates(advocates);
   };
 
+  const formatPhoneNumber = (phoneNumber: number) => {
+    if (!phoneNumber) return '';
+
+    const phoneStr = phoneNumber.toString();
+
+    if (phoneStr.length === 10) {
+      return `(${phoneStr.slice(0, 3)}) ${phoneStr.slice(3, 6)}-${phoneStr.slice(6)}`;
+    }
+
+    if (phoneStr.length === 11 && phoneStr.startsWith('1')) {
+      return `+1 (${phoneStr.slice(1, 4)}) ${phoneStr.slice(4, 7)}-${phoneStr.slice(7)}`;
+    }
+  }
+
   return (
-    <main style={{ margin: "24px" }}>
-      <h1>Solace Advocates</h1>
-      <br />
-      <br />
+    <main className="container mx-auto px-6 py-8 max-w-7xl">
+      <h1 className="text-4xl font-bold text-gray-900 mb-8">Solace Advocates</h1>
+
       {error && (
-        <div style={{ color: "red", marginBottom: "16px" }}>
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
           Error: {error}
         </div>
       )}
-      <div>
-        <p>Search</p>
-        <p>
-          Searching for: <span>{searchTerm}</span>
+
+      <div className="p-6 mb-8">
+        <label className="block text-lg font-semibold text-gray-700 mb-2">
+          Search
+        </label>
+        <p className="text-sm text-gray-600 mb-3">
+          Searching for: <span className="font-semibold text-gray-900">{searchTerm || "all"}</span>
         </p>
-        <input style={{ border: "1px solid black" }} onChange={onChange} />
-        <button onClick={onClick}>Reset Search</button>
+        <div className="flex gap-3">
+          <input
+            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+            onChange={onChange}
+            value={searchTerm}
+            placeholder="Search by name, city, degree, specialty, or years..."
+          />
+          <button
+            onClick={onClick}
+            className="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 active:bg-blue-800 transition"
+          >
+            Reset Search
+          </button>
+        </div>
       </div>
-      <br />
-      <br />
-      <table>
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>City</th>
-            <th>Degree</th>
-            <th>Specialties</th>
-            <th>Years of Experience</th>
-            <th>Phone Number</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredAdvocates.map((advocate) => {
-            return (
-              <tr key={`row-${advocate.id}`}>
-                <td>{advocate.firstName}</td>
-                <td>{advocate.lastName}</td>
-                <td>{advocate.city}</td>
-                <td>{advocate.degree}</td>
-                <td>
-                  {advocate.specialties.map((s) => (
-                    <div key={`specialty-${s}`}>{s}</div>
-                  ))}
-                </td>
-                <td>{advocate.yearsOfExperience}</td>
-                <td>{advocate.phoneNumber}</td>
+
+      <div>
+        <div>
+          <table className="w-full">
+            <thead className="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">First Name</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Last Name</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">City</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Degree</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Specialties</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Years of Experience</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Phone Number</th>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {filteredAdvocates.map((advocate) => {
+                return (
+                  <tr key={`row-${advocate.id}`} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-sm text-gray-900">{advocate.firstName}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900">{advocate.lastName}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900">{advocate.city}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900">{advocate.degree}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900">
+                      <div className="flex flex-wrap gap-1">
+                        {advocate.specialties.map((s) => (
+                          <span key={`specialty-${s}`} className="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900">{advocate.yearsOfExperience}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">{formatPhoneNumber(advocate.phoneNumber)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </main>
   );
 }
