@@ -30,149 +30,64 @@ const specialties = [
   "Domestic abuse",
 ];
 
-const randomSpecialty = () => {
-  const random1 = Math.floor(Math.random() * 24);
-  const random2 = Math.floor(Math.random() * (24 - random1)) + random1 + 1;
+const firstNames = [
+  "John", "Jane", "Alice", "Michael", "Emily", "Chris", "Jessica", "David",
+  "Laura", "Daniel", "Sarah", "James", "Megan", "Joshua", "Amanda", "Robert",
+  "Jennifer", "William", "Elizabeth", "Richard", "Maria", "Joseph", "Susan",
+  "Thomas", "Karen", "Charles", "Nancy", "Christopher", "Lisa", "Matthew",
+  "Betty", "Anthony", "Dorothy", "Mark", "Sandra", "Donald", "Ashley",
+  "Steven", "Kimberly", "Paul", "Emily", "Andrew", "Donna", "Kenneth",
+  "Michelle", "George", "Carol", "Kevin", "Amanda", "Brian", "Melissa",
+];
 
-  return [random1, random2];
+const lastNames = [
+  "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis",
+  "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson",
+  "Thomas", "Taylor", "Moore", "Jackson", "Martin", "Lee", "Perez", "Thompson",
+  "White", "Harris", "Sanchez", "Clark", "Ramirez", "Lewis", "Robinson",
+  "Walker", "Young", "Allen", "King", "Wright", "Scott", "Torres", "Nguyen",
+  "Hill", "Flores", "Green", "Adams", "Nelson", "Baker", "Hall", "Rivera",
+  "Campbell", "Mitchell", "Carter", "Roberts",
+];
+
+const cities = [
+  "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia",
+  "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Jacksonville",
+  "Fort Worth", "Columbus", "San Francisco", "Charlotte", "Indianapolis",
+  "Seattle", "Denver", "Washington", "Boston", "El Paso", "Detroit", "Nashville",
+  "Portland", "Memphis", "Oklahoma City", "Las Vegas", "Louisville", "Baltimore",
+  "Milwaukee", "Albuquerque", "Tucson", "Fresno", "Sacramento", "Kansas City",
+  "Long Beach", "Mesa", "Atlanta", "Colorado Springs", "Virginia Beach", "Raleigh",
+  "Omaha", "Miami", "Oakland", "Minneapolis", "Tulsa", "Wichita", "New Orleans",
+];
+
+const degrees = ["MD", "PhD", "MSW", "PsyD", "LCSW", "LPC", "LMFT"];
+
+const randomElement = <T>(array: T[]): T => {
+  return array[Math.floor(Math.random() * array.length)];
 };
 
-const advocateData = [
-  {
-    firstName: "John",
-    lastName: "Doe",
-    city: "New York",
-    degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 10,
-    phoneNumber: 5551234567,
-  },
-  {
-    firstName: "Jane",
-    lastName: "Smith",
-    city: "Los Angeles",
-    degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 8,
-    phoneNumber: 5559876543,
-  },
-  {
-    firstName: "Alice",
-    lastName: "Johnson",
-    city: "Chicago",
-    degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 5,
-    phoneNumber: 5554567890,
-  },
-  {
-    firstName: "Michael",
-    lastName: "Brown",
-    city: "Houston",
-    degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 12,
-    phoneNumber: 5556543210,
-  },
-  {
-    firstName: "Emily",
-    lastName: "Davis",
-    city: "Phoenix",
-    degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 7,
-    phoneNumber: 5553210987,
-  },
-  {
-    firstName: "Chris",
-    lastName: "Martinez",
-    city: "Philadelphia",
-    degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 9,
-    phoneNumber: 5557890123,
-  },
-  {
-    firstName: "Jessica",
-    lastName: "Taylor",
-    city: "San Antonio",
-    degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 11,
-    phoneNumber: 5554561234,
-  },
-  {
-    firstName: "David",
-    lastName: "Harris",
-    city: "San Diego",
-    degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 6,
-    phoneNumber: 5557896543,
-  },
-  {
-    firstName: "Laura",
-    lastName: "Clark",
-    city: "Dallas",
-    degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 4,
-    phoneNumber: 5550123456,
-  },
-  {
-    firstName: "Daniel",
-    lastName: "Lewis",
-    city: "San Jose",
-    degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 13,
-    phoneNumber: 5553217654,
-  },
-  {
-    firstName: "Sarah",
-    lastName: "Lee",
-    city: "Austin",
-    degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 10,
-    phoneNumber: 5551238765,
-  },
-  {
-    firstName: "James",
-    lastName: "King",
-    city: "Jacksonville",
-    degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 5,
-    phoneNumber: 5556540987,
-  },
-  {
-    firstName: "Megan",
-    lastName: "Green",
-    city: "San Francisco",
-    degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 14,
-    phoneNumber: 5559873456,
-  },
-  {
-    firstName: "Joshua",
-    lastName: "Walker",
-    city: "Columbus",
-    degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 9,
-    phoneNumber: 5556781234,
-  },
-  {
-    firstName: "Amanda",
-    lastName: "Hall",
-    city: "Fort Worth",
-    degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 3,
-    phoneNumber: 5559872345,
-  },
-];
+const randomSpecialty = () => {
+  const count = Math.floor(Math.random() * 8) + 1;
+  const shuffled = [...specialties].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+};
+
+const randomPhoneNumber = (): number => {
+  const npa = Math.floor(Math.random() * 900) + 100;
+  const nxx = Math.floor(Math.random() * 900) + 100;
+  const xxxx = Math.floor(Math.random() * 10000);
+  return parseInt(`${npa}${nxx.toString().padStart(3, '0')}${xxxx.toString().padStart(4, '0')}`);
+};
+
+const advocateData = Array.from({ length: 1000 }, () => ({
+  firstName: randomElement(firstNames),
+  lastName: randomElement(lastNames),
+  city: randomElement(cities),
+  degree: randomElement(degrees),
+  specialties: randomSpecialty(),
+  yearsOfExperience: Math.floor(Math.random() * 25) + 1,
+  phoneNumber: randomPhoneNumber(),
+}));
 
 export { advocateData };
